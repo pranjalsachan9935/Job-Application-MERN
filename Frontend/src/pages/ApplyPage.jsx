@@ -88,7 +88,7 @@ export default function UploadResumePage() {
     const token = localStorage.getItem("token");
 
     try {
-      const response = await fetch("http://localhost:4000/user/apply_job", {
+      const response = await fetch("https://job-application-mern-bv2m.vercel.app/user/apply_job", {
         method: "POST",
         body: data,
         headers: {
