@@ -8,11 +8,14 @@ const port = process.env.PORT || 3000;
 const userRouter = require("./routes/userRouter");
 const cors = require("cors");
 
-// app.use(cors());
+app.options("*", cors()); // Enable pre-flight for all routes
+const allowedOrigins = [
+  "https://job-application-mern-txz1.vercel.app", // your deployed frontend
+];
+
 app.use(cors({
-  origin: 'https://job-application-mern-txz1.vercel.app',
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  credentials: true
+  origin: allowedOrigins,
+  credentials: true,
 }));
 
 
