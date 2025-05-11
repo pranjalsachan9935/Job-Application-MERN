@@ -126,7 +126,7 @@ export default function UploadResumePage() {
           </p>
         </div>
 
-        <Card className="overflow-hidden shadow-lg">
+        <Card className="overflow-hidden shadow-lg p-0">
           {jobDetails && (
             <CardHeader className="bg-blue-50 border-b border-blue-100 p-6">
               <div className="flex items-start justify-between">
@@ -177,7 +177,7 @@ export default function UploadResumePage() {
                     id="phone"
                     name="phone"
                     type="tel"
-                    placeholder="+1 (555) 123-4567"
+                    placeholder="+91 123 456 7890"
                     value={formData.phone}
                     onChange={handleChange}
                     required
