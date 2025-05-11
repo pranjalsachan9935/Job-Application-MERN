@@ -65,6 +65,7 @@ exports.getApplicantsList = async (req, res) => {
 
     // Convert resume buffer to base64 URL
     const applicantsWithBase64Resume = applicants.map((app) => {
+      console.log("User Full Name:", app.userId?.name);
       const resumeBase64 = app.resume?.data
         ? `data:${app.resume.contentType};base64,${app.resume.data.toString("base64")}`
         : null;
