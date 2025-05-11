@@ -3,6 +3,8 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
+import { useNavigate } from "react-router-dom";
+
 import {
   Select,
   SelectItem,
@@ -39,6 +41,7 @@ export default function UploadResumePage() {
 
   const [jobDetails, setJobDetails] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const navigate = useNavigate();
 
   // Load job details from localStorage on mount
   useEffect(() => {
@@ -88,7 +91,7 @@ export default function UploadResumePage() {
     const token = localStorage.getItem("token");
 
     try {
-      const response = await fetch("https://job-application-mern-bv2m.vercel.app/user/apply_job", {
+      const response = await fetch("http://localhost:4000/user/apply_job", {
         method: "POST",
         body: data,
         headers: {
@@ -97,8 +100,8 @@ export default function UploadResumePage() {
       });
 
       if (response.ok) {
-        alert("Application submitted successfully!");
         localStorage.removeItem("selectedJob");
+        navigate("/profile"); 
       } else {
         const result = await response.json();
         alert(result.error || "Submission failed. Please try again.");
@@ -274,7 +277,7 @@ export default function UploadResumePage() {
               <div className="pt-4">
                 <Button
                   type="submit"
-                  className="w-full py-6 text-base font-medium"
+                  className="w-full py-4 text-base font-medium"
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? "Submitting..." : "Submit Application"}
