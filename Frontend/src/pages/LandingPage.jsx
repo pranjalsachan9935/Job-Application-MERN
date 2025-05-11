@@ -49,6 +49,8 @@ export default function HomePage() {
   const [searchTerm, setSearchTerm] = useState("");
   const [locationFilter, setLocationFilter] = useState("");
   const navigate = useNavigate();
+  const user = JSON.parse(localStorage.getItem("user"));
+  const isAdmin = user?.role === "admin";
 
   useEffect(() => {
     fetchJobs();
@@ -159,9 +161,11 @@ export default function HomePage() {
 
                   <Button
                     onClick={() => handleApply(job)}
-                    className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700"
+                    disabled={isAdmin}
+                    className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    Apply Now <ArrowRight className="w-4 h-4 ml-2" />
+                    {isAdmin ? "Not Applicable" : "Apply Now"}{" "}
+                    {!isAdmin && <ArrowRight className="w-4 h-4 ml-2" />}
                   </Button>
                 </CardContent>
               </Card>
