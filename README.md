@@ -3,8 +3,7 @@ Recent Updates->
 1- Logout Functionality: Users can now securely log out.
 
 2- Role-Based Routing:
-
-    -Admins are restricted from accessing Apply to Job and User Profile pages.
+Admins are restricted from accessing Apply to Job and User Profile pages.
 
 3- "Apply Now" Button Disabled for Admins: Ensures only users can apply for jobs.
 
