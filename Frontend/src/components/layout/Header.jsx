@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { User,Briefcase, ShieldCheck } from "lucide-react";
+import { User, Briefcase, UserCheck, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export default function Header() {
@@ -21,8 +21,8 @@ export default function Header() {
     <header className="bg-white dark:bg-gray-900 border-b dark:border-gray-700 sticky top-0 z-50 shadow-sm">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-3 flex justify-between items-center">
         {/* Left side - Logo */}
-        <Link 
-          to="/" 
+        <Link
+          to="/"
           className="text-xl font-bold text-gray-900 dark:text-white flex items-center gap-2"
         >
           <Briefcase className="text-blue-600 h-6 w-6" />
@@ -46,43 +46,50 @@ export default function Header() {
         <div className="flex items-center gap-4">
           {/* Admin Dashboard Button */}
           {isLoggedIn && isAdmin && (
-            <Button
-              variant="outline"
-              onClick={() => navigate("/admin-dashboard")}
-              className="bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-500 dark:to-indigo-500 hover:from-blue-700 hover:to-indigo-700 text-white shadow-md hover:text-white border-none "
+            <Link
+              to="/admin-dashboard"
+              className={`p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 ${navLinkClass(
+                "/admin-dashboard"
+              )}`}
             >
-               <ShieldCheck className="h-4 w-4" />
-              Admin
-            </Button>
+              <UserCheck className="h-6 w-6" />
+            </Link>
           )}
 
           {/* Login Button */}
-          {!isLoggedIn && (
+          {isLoggedIn && (
             <Button
-              onClick={() => navigate("/login")}
-              className="bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-500 dark:to-indigo-500 hover:from-blue-700 hover:to-indigo-700 text-white shadow-md"
+              onClick={() => {
+                localStorage.removeItem("user");
+                navigate("/login");
+              }}
+              className=" bg-transparent hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-600 dark:text-gray-400 rounded-md p-2 transition-colors border-1 border-gray-300 dark:border-gray-700 font-semibold"
             >
-              Login/ Register
+              <LogOut className="h-8 w-8 " />{" "}
             </Button>
           )}
 
           {/* Profile/User Icon */}
           {isLoggedIn && !isAdmin && (
-            <Link 
-              to="/profile" 
-              className={`p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 ${navLinkClass("/profile")}`}
+            <Link
+              to="/profile"
+              className={`p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 ${navLinkClass(
+                "/profile"
+              )}`}
             >
-              <User className="h-5 w-5" />
+              <User className="h-6 w-6 " />
             </Link>
           )}
 
           {/* Signup Icon */}
           {!isLoggedIn && (
-            <Link 
-              to="/signup" 
-              className={`p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 ${navLinkClass("/signup")}`}
+            <Link
+              to="/signup"
+              className={`p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 ${navLinkClass(
+                "/signup"
+              )}`}
             >
-              <User className="h-5 w-5" />
+              <User className="h-6 w-6 " />
             </Link>
           )}
         </div>
